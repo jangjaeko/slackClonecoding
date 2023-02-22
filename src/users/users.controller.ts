@@ -1,14 +1,25 @@
 import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { User } from 'src/common/decorators/user.decorator';
+import { UserDto } from 'src/common/dto/User.dto';
 import { JoinRequestDto } from './Dto/Join.request.dto';
 import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
+
+  @ApiResponse({
+    type: UserDto,
+    description: '성공',
+  })
+  @ApiOperation({ summary: '내 정보 조회' })
   @Get()
-  getUsers(@Req() req) {
-    return req.user;
+  getUsers(@User() user) {
+    return user;
   }
+
+  @ApiOperation({ summary: '회원가입' })
   @Post()
   postUsers(@Body() data: JoinRequestDto) {
     return this.usersService.postUsers(
@@ -17,8 +28,13 @@ export class UsersController {
       data.password,
     );
   }
+  @ApiOperation({ summary: '로그인' })
   @Post('login')
-  logIn() {}
+  logIn(@User() user) {
+    return user;
+  }
+
+  @ApiOperation({ summary: '로그아웃' })
   @Post('logout')
   logOut(@Req() req, @Res() res) {
     req.logout();

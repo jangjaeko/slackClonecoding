@@ -7,8 +7,8 @@ import { UsersModule } from './users/users.module';
 import { WorkspacesModule } from './workspaces/workspaces.module';
 import { ChannelsModule } from './channels/channels.module';
 import { DmsModule } from './dms/dms.module';
-import { ChannelController } from './channel/channel.controller';
-import { ChannelService } from './channel/channel.service';
+import { ChannelsService } from './channels/channels.service';
+import { ChannelsController } from './channels/channels.controller';
 
 @Module({
   imports: [
@@ -18,8 +18,8 @@ import { ChannelService } from './channel/channel.service';
     ChannelsModule,
     DmsModule,
   ],
-  controllers: [AppController, ChannelController],
-  providers: [AppService, ChannelService],
+  controllers: [AppController, ChannelsController],
+  providers: [AppService, ChannelsService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): void {

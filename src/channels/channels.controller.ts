@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 
 @Controller('api/workspaces/:url/channels')
-export class WorkspacesController {
+export class ChannelsController {
   @Get()
   getAllChannel() {}
   @Post()
