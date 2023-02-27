@@ -9,6 +9,7 @@ import { ChannelsModule } from './channels/channels.module';
 import { DmsModule } from './dms/dms.module';
 import { ChannelsService } from './channels/channels.service';
 import { ChannelsController } from './channels/channels.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
@@ -17,6 +18,16 @@ import { ChannelsController } from './channels/channels.controller';
     WorkspacesModule,
     ChannelsModule,
     DmsModule,
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'jaeho',
+      password: 'wkdwogh4',
+      database: 'slackclone',
+      entities: [],
+      synchronize: true,
+    }),
   ],
   controllers: [AppController, ChannelsController],
   providers: [AppService, ChannelsService],
